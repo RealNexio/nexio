@@ -1,0 +1,197 @@
+/* 🌀 Základné nastavenia a farby */
+:root {
+  --primary: #00d0ff;
+  --secondary: #ff4d6d;
+  --accent: #ffea00;
+  --bg: #0f0f0f;
+  --card: #1a1a1a;
+  --text: #ffffff;
+}
+
+/* 🔄 Plynulé scrollovanie */
+html {
+  scroll-behavior: smooth;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* 🔝 Navigácia */
+header {
+  background: rgba(18, 18, 18, 0.5);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text);
+}
+.logo span {
+  color: var(--primary);
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+}
+nav ul li {
+  margin-left: 1.5rem;
+}
+nav ul li a {
+  color: #ccc;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+nav ul li a:hover {
+  color: var(--accent);
+}
+
+/* 🎯 Sekcie */
+section {
+  padding: 4rem 2rem;
+  margin: 2rem;
+  border-radius: 20px;
+  background: var(--card);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+section:hover {
+  transform: scale(1.01);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5);
+}
+
+/* 🦄 Hero sekcia */
+.hero {
+  background: linear-gradient(135deg, #1c1c1c, #292929);
+  color: var(--text);
+  border-radius: 0;
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+.hero h1 {
+  font-size: 3rem;
+  background: linear-gradient(to right, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.hero p {
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  color: #ccc;
+}
+.buttons {
+  margin-top: 2.5rem;
+}
+
+/* 🔘 Tlačidlá */
+.btn {
+  display: inline-block;
+  padding: 1rem 2.2rem;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  margin: 0.5rem;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+.btn::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: rgba(255, 255, 255, 0.08);
+  transform: rotate(45deg);
+  pointer-events: none;
+  transition: all 0.6s ease;
+}
+.btn:hover::before {
+  top: 150%;
+  left: 150%;
+}
+.btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+}
+
+/* 🧨 Tlačidlá: farby */
+.download {
+  background: linear-gradient(45deg, #00ffe0, #00d0ff);
+  color: #000;
+}
+.download:hover {
+  background: linear-gradient(45deg, #00d0ff, #00ffe0);
+}
+
+.donate {
+  background: linear-gradient(45deg, #ff4d6d, #ff7e5f);
+  color: #fff;
+}
+.donate:hover {
+  background: linear-gradient(45deg, #ff7e5f, #ff4d6d);
+}
+
+/* ✨ Funkcie */
+.features ul {
+  list-style: none;
+  padding: 0;
+}
+.features ul li {
+  font-size: 1.1rem;
+  margin: 1rem 0;
+  background: #222;
+  padding: 0.8rem;
+  border-radius: 12px;
+  box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.05);
+  transition: transform 0.3s ease;
+}
+.features ul li:hover {
+  transform: scale(1.05);
+}
+
+/* 👟 Footer */
+footer {
+  background: #121212;
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 0.9rem;
+  color: #aaa;
+  margin-top: 3rem;
+  border-top: 1px solid #222;
+}
+footer a {
+  color: var(--primary);
+  text-decoration: none;
+}
+footer a:hover {
+  text-decoration: underline;
+}
