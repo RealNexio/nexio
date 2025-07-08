@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>Nexio RNG</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="https://real-littleapps.github.io/our-search-engine/icon.png" type="image/x-icon">
+</head>
+
+<!-- 🟦 Navigácia -->
+<header>
+  <div class="logo">Nexio<span>RNG</span></div>
+  <nav>
+    <ul>
+      <li><a href="https://real-littleapps.github.io/nexio/#features">Functions</a></li>
+      <li><a href="https://real-littleapps.github.io/nexio/#download">Download</a></li>
+      <li><a href="https://real-littleapps.github.io/nexio/#donate">Donate</a></li>
+      <li><a href="https://discord.gg/F6e7Etj6qa">Support</a></li>
+      <li><a href="https://real-littleapps.github.io/nexio-search">Search</a></li>
+      <li><a href="tools.html">Tools</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="coin-container">
+  <h1>Random number generator</h1>
+
+  <div class="inputs">
+    <input type="number" id="min" placeholder="Min">
+    <input type="number" id="max" placeholder="Max">
+  </div>
+
+  <div id="number" class="coin-container">...</div>
+  <button onclick="generateRandomNumber()" class="btn Tools">Generate</button>
+</div>
+
+<footer>
+  <p>&copy Nexio - All Rights Reserved</p>
+</footer>
+
+</body>
+
+<script>
+  function generateRandomNumber() {
+    const min = parseInt(document.getElementById("min").value);
+    const max = parseInt(document.getElementById("max").value);
+
+    if (isNaN(min) || isNaN(max) || min > max) {
+      document.getElementById("number").textContent = "❌Error❌";
+      alert("❌Please enter valid numbers! (Min must be less than or equal to Max)");
+      return;
+    }
+
+    const number = Math.floor(Math.random() * (max - min + 1)) + min;
+    document.getElementById("number").textContent = number;
+  }
+</script>
+
+</html>
