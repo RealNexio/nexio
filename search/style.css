@@ -406,6 +406,7 @@ button:hover {
   flex-grow: 100;
   flex-basis: 110;
   align-content: top;
+  padding: 3px;
 }
 
 .h2center {
