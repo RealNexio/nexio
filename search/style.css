@@ -378,3 +378,38 @@ button:hover {
 .tool:hover::after {
   width: 100%;
 }
+
+.parent {
+  flex: 1;
+  padding-top: 5px;
+  align-content: center;
+  border: #1a1a1a00 solid 2px;
+  border-radius: 12px;
+  background-color: #1a1a1a00;
+  margin-top: 30px;
+  margin-bottom: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.sponzor {
+  flex: 1;
+  text-align: center;
+  border: #313131 solid 2px;
+  border-radius: 12px;
+  background-color: #313131;
+  margin-top: 30px;
+  margin-bottom: 5px;
+  flex-grow: 100;
+  flex-basis: 110;
+  align-content: top;
+}
+
+.h2center {
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 0px;
+}
