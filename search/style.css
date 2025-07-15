@@ -220,7 +220,7 @@ footer a:hover {
 }
 
 .search-form input[type="text"] {
-  background: #535353;
+  background-color: #535353;
   padding: 10px;
   font-size: 16px;
   width: 100%;
@@ -228,6 +228,11 @@ footer a:hover {
   border: 2px solid var(--bg);
   border-radius: 6px;
   box-sizing: border-box;
+  transition: all 0.3 ease;
+}
+
+.search-form kinput[type="text"]:hover {
+  background-color: #c3c3c3;
 }
 
 .search-form button {
