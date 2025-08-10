@@ -220,7 +220,7 @@ footer a:hover {
 }
 
 .search-form input[type="text"] {
-  background-color: #535353;
+  background: linear-gradient(90deg, #ffffff, #00d0ff);
   padding: 10px;
   font-size: 16px;
   width: 100%;
@@ -228,11 +228,6 @@ footer a:hover {
   border: 2px solid var(--bg);
   border-radius: 6px;
   box-sizing: border-box;
-  transition: all 0.3 ease;
-}
-
-.search-form kinput[type="text"]:hover {
-  background-color: #c3c3c3;
 }
 
 .search-form button {
@@ -418,4 +413,113 @@ button:hover {
   text-align: center;
   margin-top: 50px;
   margin-bottom: 0px;
+}
+
+/* ... Tvoj existujúci CSS ... */
+
+/* Nové štýly pre výsledky vyhľadávania */
+#results {
+    max-width: 800px;
+    margin: 2em auto;
+    padding: 0 1em;
+}
+
+.result-item {
+    background: var(--card); /* Použijeme tvoju premennú --card */
+    border-radius: 12px;
+    padding: 1.5em;
+    margin-bottom: 1.5em;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.result-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+.result-item h3 {
+    margin-top: 0;
+    margin-bottom: 0.5em;
+}
+
+.result-item h3 a {
+    color: var(--primary); /* Použijeme tvoju premennú --primary */
+    text-decoration: none;
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+.result-item h3 a:hover {
+    text-decoration: underline;
+}
+
+.result-item .link {
+    color: #90ee90; /* Svetlozelená farba pre URL */
+    font-size: 0.9em;
+    margin-bottom: 1em;
+    display: block;
+}
+
+.result-item p {
+    color: #ccc;
+    font-size: 1em;
+    margin: 0;
+}
+
+/* Pridaj tento štýl do tvojho existujúceho style.css */
+.search-page-container {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+    min-height: 80vh;
+}
+
+/* ... Váš existujúci CSS kód ... */
+
+.pagination {
+    text-align: center;
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+.pagination button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.pagination button:hover {
+    background-color: #0056b3;
+}
+
+/* Štýl pre nový nadpis "NEXIO" */
+.main-title {
+    font-family: 'Inter', sans-serif; /* Použijeme pekný font, ak je k dispozícii */
+    font-size: 5rem; /* Veľké písmo */
+    font-weight: 700; /* Tučné písmo */
+    text-align: center; /* Vycentruje nadpis */
+    margin-bottom: 20px; /* Pridá priestor pod nadpisom */
+    letter-spacing: -3px; /* Zníži medzeru medzi písmenami */
+}
+
+/* Štýl pre prvú časť (NEX) - silná modrá */
+.main-title .part-one {
+    color: #ffffff;
+}
+
+/* Štýl pre druhú časť (IO) - slabá modrá */
+.main-title .part-two {
+    color: #00d0ff;
+}
+
+/* Responzívny dizajn pre menšie obrazovky */
+@media (max-width: 600px) {
+    .main-title {
+        font-size: 3rem;
+    }
 }

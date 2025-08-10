@@ -37,19 +37,25 @@
         </nav>
     </header>
 
-    <section class="hero">
-        <h1 class="hero-h1">Nexio search</h1>
-        <p class="hero-subtitle">Your personal search engine</p>
-    </section>
     <div class="center">
-        <!-- Toto je miesto, kde sa automaticky zobrazí vyhľadávač -->
-        <form class="search-form" action="https://cse.google.com/cse" method="GET">
-            <input type="text" name="q" placeholder="Search something...">
-            <input type="hidden" name="cx" value="967a9236a9c554e8f">
-            <input type="hidden" name="ie" value="UTF-8">
-            <button type="submit">🔍</button>
-        </form>
+        <!-- Toto je upravený nadpis, ktorý umožní dvojfarebný efekt -->
+        <div class="main-title">
+            <span class="part-one">Nexio</span><span class="part-two">Search</span>
+        </div>
+        <!-- Koniec upraveného nadpisu -->
     </div>
+    
+
+    <div class="center">
+        <div class="search-form">
+            <input type="text" id="searchInput" placeholder="Search something...">
+            <button id="searchButton">🔍</button>
+        </div>
+    </div>
+
+
+<script src="script.js"></script>
+
     <div class="parent">
         <div class="sponzor">
             <a href="https://www.youtube.com/" id="youtube_logo_target" target="_blank">
@@ -76,7 +82,7 @@
                 <img id="chatgpt_logo" src="https://realnexio.github.io/nexio/images/chatgpt.png" width="50" height="50"></a>
         </div>
         <div class="sponzor">
-            <a href="https://google.gemini.com/" id="gemini_logo_target" target="_blank">
+            <a href="https://gemini.google.com/" id="gemini_logo_target" target="_blank">
                 <img id="gemini_logo" src="https://realnexio.github.io/nexio/images/gemini.png" width="50" height="50"></a>
         </div>
         <div class="sponzor">
