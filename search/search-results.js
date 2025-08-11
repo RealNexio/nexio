@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch(apiUrl);
             if (!response.ok) {
                 const errorData = await response.json();
-                throw new Error(`Chyba pri volaní API: ${response.status} ${response.statusText} - ${errorData.error.message}`);
+                throw new Error(`Error while calling API: ${response.status} ${response.statusText} - ${errorData.error.message}`);
             }
             const data = await response.json();
 
