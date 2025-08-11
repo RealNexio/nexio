@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     async function performSearch(queryText, page) {
-        resultsContainer.innerHTML = '<p style="text-align: center; color: #ccc;">Načítavam výsledky...</p>';
+        resultsContainer.innerHTML = '<p style="text-align: center; color: #ccc;">Finding results...</p>';
         const startIndex = (page - 1) * numResults + 1;
         
         const apiUrl = `https://www.googleapis.com/customsearch/v1?key=${apiKey}&cx=${cx}&q=${encodeURIComponent(queryText)}&start=${startIndex}&num=${numResults}`;
