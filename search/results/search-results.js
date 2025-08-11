@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
         currentQuery = initialQuery;
         performSearch(currentQuery, currentPage);
     } else {
-        resultsContainer.innerHTML = '<p>Zadaj text na vyhľadanie.</p>';
+        resultsContainer.innerHTML = '<p>Search something...</p>';
     }
 
     searchButton.addEventListener('click', () => {
