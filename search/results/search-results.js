@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     async function performSearch(queryText, page) {
-        resultsContainer.innerHTML = '<p style="text-align: center; color: #ccc;">Načítavam výsledky...</p>';
+        resultsContainer.innerHTML = '<p style="text-align: center; color: #ccc;">Finding results...</p>';
         const startIndex = (page - 1) * numResults + 1;
         
         const apiUrl = `https://www.googleapis.com/customsearch/v1?key=${apiKey}&cx=${cx}&q=${encodeURIComponent(queryText)}&start=${startIndex}&num=${numResults}`;
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch(apiUrl);
             if (!response.ok) {
                 const errorData = await response.json();
-                throw new Error(`Chyba pri volaní API: ${response.status} ${response.statusText} - ${errorData.error.message}`);
+                throw new Error(`Error when calling API: ${response.status} ${response.statusText} - ${errorData.error.message}`);
             }
             const data = await response.json();
 
@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     resultsContainer.appendChild(resultItem);
                 });
             } else {
-                resultsContainer.innerHTML = '<p style="text-align: center; color: #ccc;">Neboli nájdené žiadne výsledky.</p>';
+                resultsContainer.innerHTML = '<p style="text-align: center; color: #ccc;">Nothing finded.</p>';
             }
 
             prevButton.style.display = (currentPage > 1) ? 'inline-block' : 'none';
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         } catch (error) {
             console.error('Došlo k chybe:', error);
-            resultsContainer.innerHTML = `<p style="color:red; text-align: center;">Došlo k chybe pri načítaní výsledkov: ${error.message}</p>`;
+            resultsContainer.innerHTML = `<p style="color:red; text-align: center;">Error: ${error.message}</p>`;
             prevButton.style.display = 'none';
             nextButton.style.display = 'none';
         }
