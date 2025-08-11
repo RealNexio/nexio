@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
         currentQuery = initialQuery;
         performSearch(currentQuery, currentPage);
     } else {
-        resultsContainer.innerHTML = '<p>Zadaj text na vyhľadanie.</p>';
+        resultsContainer.innerHTML = '<p>Search somthing...</p>';
     }
 
     searchButton.addEventListener('click', () => {
@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     resultsContainer.appendChild(resultItem);
                 });
             } else {
-                resultsContainer.innerHTML = '<p style="text-align: center; color: #ccc;">Neboli nájdené žiadne výsledky.</p>';
+                resultsContainer.innerHTML = '<p style="text-align: center; color: #ccc;">Nothing finded.</p>';
             }
 
             prevButton.style.display = (currentPage > 1) ? 'inline-block' : 'none';
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         } catch (error) {
             console.error('Došlo k chybe:', error);
-            resultsContainer.innerHTML = `<p style="color:red; text-align: center;">Došlo k chybe pri načítaní výsledkov: ${error.message}</p>`;
+            resultsContainer.innerHTML = `<p style="color:red; text-align: center;">Error: ${error.message}</p>`;
             prevButton.style.display = 'none';
             nextButton.style.display = 'none';
         }
