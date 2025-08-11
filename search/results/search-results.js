@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const resultItem = document.createElement('div');
                     resultItem.classList.add('result-item');
                     resultItem.innerHTML = `
-                        <h3><a href="${item.link}" target="_blank">${item.title}</a></h3>
+                        <h3><a href="${item.link}">${item.title}</a></h3>
                         <p class="link">${item.displayLink}</p>
                         <p>${item.snippet}</p>
                     `;
