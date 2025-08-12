@@ -417,7 +417,7 @@ button:hover {
 
 /* ... Tvoj existujúci CSS ... */
 
-/* Nové štýly pre výsledky vyhľadávania */
+/* Nové štýly pre výsledky vyhľadávania a stránkovanie */
 #results {
     max-width: 800px;
     margin: 2em auto;
@@ -425,7 +425,7 @@ button:hover {
 }
 
 .result-item {
-    background: var(--card); /* Použijeme tvoju premennú --card */
+    background: var(--card);
     border-radius: 12px;
     padding: 1.5em;
     margin-bottom: 1.5em;
@@ -444,7 +444,7 @@ button:hover {
 }
 
 .result-item h3 a {
-    color: var(--primary); /* Použijeme tvoju premennú --primary */
+    color: var(--primary);
     text-decoration: none;
     font-size: 1.2em;
     font-weight: 600;
@@ -455,7 +455,7 @@ button:hover {
 }
 
 .result-item .link {
-    color: #90ee90; /* Svetlozelená farba pre URL */
+    color: #90ee90;
     font-size: 0.9em;
     margin-bottom: 1em;
     display: block;
@@ -466,15 +466,6 @@ button:hover {
     font-size: 1em;
     margin: 0;
 }
-
-/* Pridaj tento štýl do tvojho existujúceho style.css */
-.search-page-container {
-    padding-top: 5rem;
-    padding-bottom: 5rem;
-    min-height: 80vh;
-}
-
-/* ... Váš existujúci CSS kód ... */
 
 .pagination {
     text-align: center;
@@ -491,20 +482,37 @@ button:hover {
     cursor: pointer;
     border-radius: 5px;
     font-size: 1em;
+    transition: background-color 0.3s;
 }
 
 .pagination button:hover {
     background-color: #0056b3;
 }
 
+/* Štýly pre nové tlačidlá a status */
+.auth-btn {
+    background: var(--primary);
+    color: #000;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+.auth-btn:hover {
+    background: #00b3ff;
+    transform: scale(1.05);
+}
+
 /* Štýl pre nový nadpis "NEXIO" */
 .main-title {
-    font-family: 'Inter', sans-serif; /* Použijeme pekný font, ak je k dispozícii */
-    font-size: 5rem; /* Veľké písmo */
-    font-weight: 700; /* Tučné písmo */
-    text-align: center; /* Vycentruje nadpis */
-    margin-bottom: 20px; /* Pridá priestor pod nadpisom */
-    letter-spacing: -3px; /* Zníži medzeru medzi písmenami */
+    font-family: 'Inter', sans-serif;
+    font-size: 5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
+    letter-spacing: -3px;
 }
 
 /* Štýl pre prvú časť (NEX) - silná modrá */

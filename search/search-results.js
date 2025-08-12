@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
         currentQuery = initialQuery;
         performSearch(currentQuery, currentPage);
     } else {
-        resultsContainer.innerHTML = '<p>Search somthing...</p>';
+        resultsContainer.innerHTML = '<p>Search something...</p>';
     }
 
     searchButton.addEventListener('click', () => {
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch(apiUrl);
             if (!response.ok) {
                 const errorData = await response.json();
-                throw new Error(`Error while calling API: ${response.status} ${response.statusText} - ${errorData.error.message}`);
+                throw new Error(`Error when calling API: ${response.status} ${response.statusText} - ${errorData.error.message}`);
             }
             const data = await response.json();
 
@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const resultItem = document.createElement('div');
                     resultItem.classList.add('result-item');
                     resultItem.innerHTML = `
-                        <h3><a href="${item.link}" target="_blank">${item.title}</a></h3>
+                        <h3><a href="${item.link}">${item.title}</a></h3>
                         <p class="link">${item.displayLink}</p>
                         <p>${item.snippet}</p>
                     `;
