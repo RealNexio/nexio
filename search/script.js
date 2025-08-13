@@ -2,13 +2,13 @@
 // Nastavenie a inicializácia Firebase
 // ==========================================================
 
-// Importovanie potrebných modulov z Firebase SDK
+// Import the necessary modules from Firebase SDK
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 import { getAuth, onAuthStateChanged, signInWithPopup, GoogleAuthProvider, signOut } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-analytics.js";
 
-// *** DÔLEŽITÉ: TENTO OBJEKT OBSAHUJE TVOJU NOVÚ KONFIGURÁCIU Z FIREBASE CONSOLE ***
-// Už ho nemusíš meniť, pokiaľ nezmeníš nastavenia projektu vo Firebase.
+// *** IMPORTANT: THIS OBJECT CONTAINS YOUR NEW CONFIGURATION FROM THE FIREBASE CONSOLE ***
+// You don't need to change it unless you change the project settings in Firebase.
 const firebaseConfig = {
 
     apiKey: "AIzaSyBC7Nq7CBfZWKAiCmez2PETrUALZpAJhpI",
@@ -30,16 +30,16 @@ const firebaseConfig = {
 
 
 // ==========================================================
-// Nastavenie Google Custom Search API
+// Google Custom Search API Settings
 // ==========================================================
 
-// Tieto kľúče sú potrebné pre vyhľadávací dotaz, ktorý sa použije na stránke s výsledkami.
-// Aj tieto sú už doplnené na základe tvojho vstupu.
+// These keys are required for the search query that will be used on the results page.
+// They are already filled in based on your input.
 const googleApiKey = "AIzaSyCrJiKX01Myq4exIRzcUBx9jNS1Mu8lDdM";
 const searchEngineId = "967a9236a9c554e8f";
 
 // ==========================================================
-// Globálne premenné a DOM elementy
+// Global variables and DOM elements
 // ==========================================================
 const searchInput = document.getElementById('searchInput');
 const searchButton = document.getElementById('searchButton');
@@ -51,24 +51,24 @@ const firebaseErrorContainer = document.getElementById('firebaseErrorContainer')
 let isPremium = false;
 
 // ==========================================================
-// Správa prihlásenia a odhlásenia
+// Login and logout management
 // ==========================================================
 
-// Skontroluje, či sú zadané platné konfiguračné údaje Firebase
+// Checks if valid Firebase configuration data is entered
 const isFirebaseConfigValid = () => {
     return firebaseConfig.apiKey && firebaseConfig.authDomain && firebaseConfig.projectId &&
            firebaseConfig.apiKey !== "YOUR_API_KEY";
 };
 
 if (!isFirebaseConfigValid()) {
-    const errorMessage = "Firebase chyba: Konfigurácia nie je platná. Prihlásenie je vypnuté.";
+    const errorMessage = "Firebase error: Configuration is not valid. Login is disabled.";
     console.error(errorMessage);
     if (firebaseErrorContainer) {
         firebaseErrorContainer.innerHTML = `<p class="error-message">${errorMessage}</p>`;
     }
     if (loginButton) loginButton.disabled = true;
     if (logoutButton) logoutButton.disabled = true;
-    if (userStatusSpan) userStatusSpan.textContent = "Chyba Firebase";
+    if (userStatusSpan) userStatusSpan.textContent = "Firebase error";
 
 } else {
     const app = initializeApp(firebaseConfig);
@@ -76,6 +76,7 @@ if (!isFirebaseConfigValid()) {
     const auth = getAuth(app);
     const googleProvider = new GoogleAuthProvider();
 
+    // The logic you are looking for is right here!
     onAuthStateChanged(auth, (user) => {
         if (user) {
             isPremium = true;
@@ -94,12 +95,12 @@ if (!isFirebaseConfigValid()) {
         loginButton.addEventListener('click', () => {
             signInWithPopup(auth, googleProvider)
                 .catch((error) => {
-                    console.error("Chyba pri prihlásení cez Google:", error);
+                    console.error("Error during Google login:", error);
                     if (firebaseErrorContainer) {
                         if (error.code === 'auth/configuration-not-found') {
-                            firebaseErrorContainer.innerHTML = `<p class="error-message">Chyba pri prihlásení: Zdá sa, že vaša adresa stránky (http://127.0.0.1:5500) nie je autorizovaná vo Firebase. Prejdite do Firebase Console, nájdite nastavenia svojej webovej aplikácie a do sekcie 'Authorized domains' pridajte '127.0.0.1'.</p>`;
+                            firebaseErrorContainer.innerHTML = `<p class="error-message">Login error: It seems your site's address (http://127.0.0.1:5500) is not authorized in Firebase. Go to the Firebase Console, find the settings for your web application, and add '127.0.0.1' to the 'Authorized domains' section.</p>`;
                         } else {
-                            firebaseErrorContainer.innerHTML = `<p class="error-message">Chyba pri prihlásení: ${error.message}</p>`;
+                            firebaseErrorContainer.innerHTML = `<p class="error-message">Login error: ${error.message}</p>`;
                         }
                     }
                 });
@@ -110,9 +111,9 @@ if (!isFirebaseConfigValid()) {
         logoutButton.addEventListener('click', () => {
             signOut(auth)
                 .catch((error) => {
-                    console.error("Chyba pri odhlásení:", error);
+                    console.error("Error during logout:", error);
                     if (firebaseErrorContainer) {
-                        firebaseErrorContainer.innerHTML = `<p class="error-message">Chyba pri odhlásení: ${error.message}</p>`;
+                        firebaseErrorContainer.innerHTML = `<p class="error-message">Logout error: ${error.message}</p>`;
                     }
                 });
         });
@@ -120,20 +121,20 @@ if (!isFirebaseConfigValid()) {
 }
 
 // ==========================================================
-// Funkcia pre vyhľadávanie a presmerovanie
+// Search and redirect function
 // ==========================================================
 
-// Počkáme, kým sa DOM načíta a potom pridáme poslucháčov udalostí
+// We wait until the DOM is loaded and then add event listeners
 document.addEventListener('DOMContentLoaded', () => {
-    // Funkcia, ktorá presmeruje na stránku s výsledkami s vyhľadávacím dopytom
+    // A function that redirects to the results page with the search query
     function redirectToSearchPage() {
         const query = searchInput.value.trim();
         if (query === '') {
             return;
         }
 
-        // Upravili sme cestu, aby smerovala na podadresár 'results'
-        const newUrl = `results?q=${encodeURIComponent(query)}`;
+        // We've modified the path to point to the 'results' subdirectory
+        const newUrl = `results.html?q=${encodeURIComponent(query)}`;
 
         window.location.href = newUrl;
     }
