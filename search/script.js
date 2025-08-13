@@ -10,14 +10,24 @@ import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.1.0/firebase
 // *** DÔLEŽITÉ: TENTO OBJEKT OBSAHUJE TVOJU NOVÚ KONFIGURÁCIU Z FIREBASE CONSOLE ***
 // Už ho nemusíš meniť, pokiaľ nezmeníš nastavenia projektu vo Firebase.
 const firebaseConfig = {
+
     apiKey: "AIzaSyBC7Nq7CBfZWKAiCmez2PETrUALZpAJhpI",
+
     authDomain: "nexio-search.firebaseapp.com",
+
     projectId: "nexio-search",
+
     storageBucket: "nexio-search.firebasestorage.app",
+
     messagingSenderId: "359269532538",
-    appId: "1:359269532538:web:ebb2ed5d6c0749b8564cc3",
-    measurementId: "G-MKFH06VJEC"
-};
+
+    appId: "1:359269532538:web:2f235f84cf10e68a564cc3",
+
+    measurementId: "G-RN2T60XRM0"
+
+  };
+
+
 
 // ==========================================================
 // Nastavenie Google Custom Search API
