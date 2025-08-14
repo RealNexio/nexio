@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // We've modified the path to point to the 'results' subdirectory
-        const newUrl = `results.html?q=${encodeURIComponent(query)}`;
+        const newUrl = `results?q=${encodeURIComponent(query)}`;
 
         window.location.href = newUrl;
     }
