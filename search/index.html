@@ -33,15 +33,6 @@
                 <li><a href="https://discord.gg/mGh8FbjPNT">Support</a></li>
                 <li><a href="https://RealNexio.github.io/nexio/search">Search</a></li>
                 <li><a href="https://RealNexio.github.io/nexio/search/tools/">Tools</a></li>
-                <li id="auth-buttons" class="flex items-center space-x-2">
-                    <span id="userStatus" class="text-sm font-medium text-gray-400">Basic User</span>
-                    <button id="loginButton" class="auth-btn">
-                        Aktivovať Premium
-                    </button>
-                    <button id="logoutButton" class="auth-btn hidden">
-                        Odhlásiť sa
-                    </button>
-                </li>
             </ul>
         </nav>
     </header>
@@ -51,8 +42,6 @@
             <span class="part-one">Nexio</span><span class="part-two">Search</span>
         </div>
     </div>
-    
-    <div id="firebaseErrorContainer"></div>
 
     <div class="center">
         <div class="search-form">
@@ -62,6 +51,10 @@
     </div>
 
     <div id="results"></div>
+    <div class="pagination hidden">
+        <button id="prevPage">Predchádzajúca</button>
+        <button id="nextPage">Ďalšia</button>
+    </div>
 
     <div class="parent">
         <div class="sponzor">
@@ -101,7 +94,7 @@
     <footer>
         <p>&copy Nexio - All Rights Reserved</p>
     </footer>
-    
+
     <script src="script.js" type="module"></script>
 </body>
 
