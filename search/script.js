@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Upravili sme cestu, aby smerovala na podadresár 'results'
-        const newUrl = `results.html?q=${encodeURIComponent(query)}`;
+        const newUrl = `results?q=${encodeURIComponent(query)}`;
 
         window.location.href = newUrl;
     }
