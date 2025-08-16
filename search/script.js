@@ -2,44 +2,34 @@
 // Nastavenie a inicializácia Firebase
 // ==========================================================
 
-// Import the necessary modules from Firebase SDK
+// Importovanie potrebných modulov z Firebase SDK
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 import { getAuth, onAuthStateChanged, signInWithPopup, GoogleAuthProvider, signOut } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-analytics.js";
 
-// *** IMPORTANT: THIS OBJECT CONTAINS YOUR NEW CONFIGURATION FROM THE FIREBASE CONSOLE ***
-// You don't need to change it unless you change the project settings in Firebase.
+// *** DÔLEŽITÉ: TENTO OBJEKT OBSAHUJE TVOJU KONFIGURÁCIU Z FIREBASE CONSOLE ***
+// Už ho nemusíš meniť, pokiaľ nezmeníš nastavenia projektu vo Firebase.
 const firebaseConfig = {
-
     apiKey: "AIzaSyBC7Nq7CBfZWKAiCmez2PETrUALZpAJhpI",
-
     authDomain: "nexio-search.firebaseapp.com",
-
     projectId: "nexio-search",
-
     storageBucket: "nexio-search.firebasestorage.app",
-
     messagingSenderId: "359269532538",
-
-    appId: "1:359269532538:web:2f235f84cf10e68a564cc3",
-
-    measurementId: "G-RN2T60XRM0"
-
-  };
-
-
+    appId: "1:359269532538:web:ebb2ed5d6c0749b8564cc3",
+    measurementId: "G-MKFH06VJEC"
+};
 
 // ==========================================================
-// Google Custom Search API Settings
+// Nastavenie Google Custom Search API
 // ==========================================================
 
-// These keys are required for the search query that will be used on the results page.
-// They are already filled in based on your input.
+// Tieto kľúče sú potrebné pre vyhľadávací dotaz, ktorý sa použije na stránke s výsledkami.
+// Aj tieto sú už doplnené na základe tvojho vstupu.
 const googleApiKey = "AIzaSyCrJiKX01Myq4exIRzcUBx9jNS1Mu8lDdM";
 const searchEngineId = "967a9236a9c554e8f";
 
 // ==========================================================
-// Global variables and DOM elements
+// Globálne premenné a DOM elementy
 // ==========================================================
 const searchInput = document.getElementById('searchInput');
 const searchButton = document.getElementById('searchButton');
@@ -51,32 +41,39 @@ const firebaseErrorContainer = document.getElementById('firebaseErrorContainer')
 let isPremium = false;
 
 // ==========================================================
-// Login and logout management
+// Správa prihlásenia a odhlásenia
 // ==========================================================
 
-// Checks if valid Firebase configuration data is entered
+// Skontroluje, či sú zadané platné konfiguračné údaje Firebase
 const isFirebaseConfigValid = () => {
     return firebaseConfig.apiKey && firebaseConfig.authDomain && firebaseConfig.projectId &&
            firebaseConfig.apiKey !== "YOUR_API_KEY";
 };
 
 if (!isFirebaseConfigValid()) {
-    const errorMessage = "Firebase error: Configuration is not valid. Login is disabled.";
+    const errorMessage = "Firebase chyba: Konfigurácia nie je platná. Prihlásenie je vypnuté.";
     console.error(errorMessage);
     if (firebaseErrorContainer) {
         firebaseErrorContainer.innerHTML = `<p class="error-message">${errorMessage}</p>`;
     }
     if (loginButton) loginButton.disabled = true;
     if (logoutButton) logoutButton.disabled = true;
-    if (userStatusSpan) userStatusSpan.textContent = "Firebase error";
+    if (userStatusSpan) userStatusSpan.textContent = "Chyba Firebase";
 
 } else {
+    // Vytvorenie inštancií Firebase
     const app = initializeApp(firebaseConfig);
     const analytics = getAnalytics(app);
     const auth = getAuth(app);
     const googleProvider = new GoogleAuthProvider();
 
-    // The logic you are looking for is right here!
+    // Diagnostická správa pre aktuálnu doménu
+    console.log(`Aktuálna doména: ${window.location.protocol}//${window.location.hostname}`);
+    if (firebaseErrorContainer) {
+        firebaseErrorContainer.innerHTML += `<p>Diagnostika: Pokúšam sa prihlásiť z adresy: <strong>${window.location.protocol}//${window.location.hostname}</strong></p>`;
+    }
+
+
     onAuthStateChanged(auth, (user) => {
         if (user) {
             isPremium = true;
@@ -95,12 +92,14 @@ if (!isFirebaseConfigValid()) {
         loginButton.addEventListener('click', () => {
             signInWithPopup(auth, googleProvider)
                 .catch((error) => {
-                    console.error("Error during Google login:", error);
+                    console.error("Chyba pri prihlásení cez Google:", error);
                     if (firebaseErrorContainer) {
                         if (error.code === 'auth/configuration-not-found') {
-                            firebaseErrorContainer.innerHTML = `<p class="error-message">Login error: It seems your site's address (http://127.0.0.1:5500) is not authorized in Firebase. Go to the Firebase Console, find the settings for your web application, and add '127.0.0.1' to the 'Authorized domains' section.</p>`;
+                            firebaseErrorContainer.innerHTML = `<p class="error-message">Chyba pri prihlásení: Zdá sa, že vaša adresa stránky nie je autorizovaná vo Firebase. Prejdite do Firebase Console, nájdite nastavenia svojej webovej aplikácie a do sekcie 'Authorized domains' pridajte <strong>${window.location.hostname}</strong>.</p>`;
+                        } else if (error.code === 'auth/unauthorized-domain') {
+                            firebaseErrorContainer.innerHTML = `<p class="error-message">Chyba pri prihlásení: Vaša doména nie je autorizovaná. Uistite sa, že <strong>${window.location.hostname}</strong> je pridaná v 'Authorized domains' v nastaveniach vašej Firebase aplikácie.</p>`;
                         } else {
-                            firebaseErrorContainer.innerHTML = `<p class="error-message">Login error: ${error.message}</p>`;
+                            firebaseErrorContainer.innerHTML = `<p class="error-message">Chyba pri prihlásení: ${error.message}</p>`;
                         }
                     }
                 });
@@ -111,9 +110,9 @@ if (!isFirebaseConfigValid()) {
         logoutButton.addEventListener('click', () => {
             signOut(auth)
                 .catch((error) => {
-                    console.error("Error during logout:", error);
+                    console.error("Chyba pri odhlásení:", error);
                     if (firebaseErrorContainer) {
-                        firebaseErrorContainer.innerHTML = `<p class="error-message">Logout error: ${error.message}</p>`;
+                        firebaseErrorContainer.innerHTML = `<p class="error-message">Chyba pri odhlásení: ${error.message}</p>`;
                     }
                 });
         });
@@ -121,20 +120,20 @@ if (!isFirebaseConfigValid()) {
 }
 
 // ==========================================================
-// Search and redirect function
+// Funkcia pre vyhľadávanie a presmerovanie
 // ==========================================================
 
-// We wait until the DOM is loaded and then add event listeners
+// Počkáme, kým sa DOM načíta a potom pridáme poslucháčov udalostí
 document.addEventListener('DOMContentLoaded', () => {
-    // A function that redirects to the results page with the search query
+    // Funkcia, ktorá presmeruje na stránku s výsledkami s vyhľadávacím dopytom
     function redirectToSearchPage() {
         const query = searchInput.value.trim();
         if (query === '') {
             return;
         }
 
-        // We've modified the path to point to the 'results' subdirectory
-        const newUrl = `results?q=${encodeURIComponent(query)}`;
+        // Upravili sme cestu, aby smerovala na podadresár 'results'
+        const newUrl = `results.html?q=${encodeURIComponent(query)}`;
 
         window.location.href = newUrl;
     }
