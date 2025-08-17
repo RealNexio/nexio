@@ -1,101 +1,81 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const resultsContainer = document.getElementById('results');
-    const prevButton = document.getElementById('prevPage');
-    const nextButton = document.getElementById('nextPage');
-    const searchInput = document.getElementById('searchInput');
-    const searchButton = document.getElementById('searchButton');
-    
-    const apiKey = "AIzaSyCrJiKX01Myq4exIRzcUBx9jNS1Mu8lDdM"; 
-    const cx = "967a9236a9c554e8f"; 
+// ====== CSE + AI Overview ======
+const searchInput = document.getElementById("searchInput");
+const searchButton = document.getElementById("searchButton");
+const resultsDiv = document.getElementById("results");
 
-    const numResults = 10;
-    let currentPage = 1;
-    let currentQuery = '';
+// ==== Gemini Config ====
+const GEMINI_API_KEY = "YOUR_GEMINI_API_KEY"; // sem daj svoj kľúč
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const initialQuery = urlParams.get('q');
-    
-    if (initialQuery) {
-        searchInput.value = initialQuery;
-        currentQuery = initialQuery;
-        performSearch(currentQuery, currentPage);
-    } else {
-        resultsContainer.innerHTML = '<p>Search something...</p>';
+// Funkcia pre vyhľadávanie v Google CSE
+function performSearch(query) {
+  if (!query) return;
+
+  // Vymaž predchádzajúce výsledky
+  resultsDiv.innerHTML = '<p style="text-align:center;color:#ccc;">Loading results...</p>';
+
+  // Spusti AI Overview
+  fetchAIOverview(query);
+
+  // Google CSE volanie
+  if (window.google && google.search && google.search.cse && google.search.cse.element) {
+    const element = google.search.cse.element.getElement("searchresults_only");
+    if (element) {
+      element.execute(query);
     }
+  } else {
+    console.warn("Google CSE not loaded yet.");
+  }
+}
 
-    searchButton.addEventListener('click', () => {
-        currentPage = 1;
-        const newQuery = searchInput.value.trim();
-        if (newQuery) {
-            currentQuery = newQuery;
-            performSearch(currentQuery, currentPage);
-        }
-    });
+// ==== AI Overview pomocou Gemini ====
+async function fetchAIOverview(query) {
+  const aiBox = document.getElementById("ai-overview");
+  const aiText = document.getElementById("ai-text");
 
-    searchInput.addEventListener('keypress', (event) => {
-        if (event.key === 'Enter') {
-            searchButton.click();
-        }
-    });
+  aiBox.style.display = "block";
+  aiText.textContent = "AI is thinking...";
 
-    nextButton.addEventListener('click', () => {
-        currentPage++;
-        performSearch(currentQuery, currentPage);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+  try {
+    const res = await fetch(
+      "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=" + GEMINI_API_KEY,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: "Give me a short overview about: " + query }]}]
+        })
+      }
+    );
 
-    prevButton.addEventListener('click', () => {
-        if (currentPage > 1) {
-            currentPage--;
-            performSearch(currentQuery, currentPage);
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-    });
+    const result = await res.json();
+    const overviewText = result?.candidates?.[0]?.content?.parts?.[0]?.text;
+    aiText.textContent = overviewText || "No AI overview available.";
+  } catch (err) {
+    console.error("AI Overview Error:", err);
+    aiText.textContent = "Error loading AI overview.";
+  }
+}
 
-    async function performSearch(queryText, page) {
-        resultsContainer.innerHTML = '<p style="text-align: center; color: #ccc;">Finding results...</p>';
-        const startIndex = (page - 1) * numResults + 1;
-        
-        const apiUrl = `https://www.googleapis.com/customsearch/v1?key=${apiKey}&cx=${cx}&q=${encodeURIComponent(queryText)}&start=${startIndex}&num=${numResults}`;
-        
-        try {
-            const response = await fetch(apiUrl);
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(`Error when calling API: ${response.status} ${response.statusText} - ${errorData.error.message}`);
-            }
-            const data = await response.json();
-
-            resultsContainer.innerHTML = '';
-            
-            if (data.items && data.items.length > 0) {
-                data.items.forEach(item => {
-                    const resultItem = document.createElement('div');
-                    resultItem.classList.add('result-item');
-                    resultItem.innerHTML = `
-                        <h3><a href="${item.link}">${item.title}</a></h3>
-                        <p class="link">${item.displayLink}</p>
-                        <p>${item.snippet}</p>
-                    `;
-                    resultsContainer.appendChild(resultItem);
-                });
-            } else {
-                resultsContainer.innerHTML = '<p style="text-align: center; color: #ccc;">Nothing finded.</p>';
-            }
-
-            prevButton.style.display = (currentPage > 1) ? 'inline-block' : 'none';
-
-            if (data.queries && data.queries.nextPage) {
-                nextButton.style.display = 'inline-block';
-            } else {
-                nextButton.style.display = 'none';
-            }
-
-        } catch (error) {
-            console.error('Došlo k chybe:', error);
-            resultsContainer.innerHTML = `<p style="color:red; text-align: center;">Error: ${error.message}</p>`;
-            prevButton.style.display = 'none';
-            nextButton.style.display = 'none';
-        }
-    }
+// ==== Eventy ====
+searchButton.addEventListener("click", () => {
+  performSearch(searchInput.value);
 });
+
+searchInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") performSearch(searchInput.value);
+});
+
+// ==== Inicializácia Google CSE elementu ====
+function initializeCSE() {
+  google.search.cse.element.render({
+    div: "results",
+    tag: 'searchresults_only'
+  });
+}
+
+// Skontroluj, či sa CSE skript načítal
+if (window.google && google.search && google.search.cse) {
+  initializeCSE();
+} else {
+  console.warn("Google CSE script not loaded yet.");
+}
