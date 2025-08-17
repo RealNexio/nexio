@@ -4,7 +4,7 @@ const searchButton = document.getElementById("searchButton");
 const resultsDiv = document.getElementById("results");
 
 // ==== Gemini Config ====
-const GEMINI_API_KEY = "YOUR_GEMINI_API_KEY"; // sem daj svoj kľúč
+const GEMINI_API_KEY = "AIzaSyCSV4BBDPPp0tIZv-T_opfXwa0aV2oTHgw"; // sem daj svoj kľúč
 
 // Funkcia pre vyhľadávanie v Google CSE
 function performSearch(query) {
