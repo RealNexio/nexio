@@ -1,33 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nexio Search - Test</title>
-<script async src="https://cse.google.com/cse.js?cx=967a9236a9c554e8f"></script>
-<link rel="stylesheet" href="style.css">
-<link rel="icon" href="https://RealNexio.github.io/nexio/icon.png" type="image/x-icon">
-</head>
-<body>
-
-<h1>Nexio Search</h1>
-
-<input type="text" id="q" placeholder="Type something...">
-<button onclick="search()">Search</button>
-
-<div class="gcse-searchresults" id="results"></div>
-
-<script>
-function search() {
-    const query = document.getElementById('q').value;
-    if(query && google && google.search && google.search.cse) {
-        // Execute the search
-        google.search.cse.element.getElement('results').execute(query);
-    }
-}
-</script>
-
-<script src="search-results.js"></script>
-
-</body>
+<!DOCTYPE html> 
+<html lang="en"> 
+    <head> 
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <meta charset="UTF-8"> 
+        <title>Nexio Search - Results</title> 
+        <link rel="stylesheet" href="style.css"> 
+        <link rel="icon" href="https://RealNexio.github.io/nexio/icon.png" type="image/x-icon"> 
+    </head> 
+    <body> 
+        <header> 
+            <div class="logo">Nexio<span>Search</span>Results</div> 
+            <nav> 
+                <ul> 
+                    <li><a href="https://RealNexio.github.io/nexio/browser/">Browser</a> </li>
+                    <li><a href="https://discord.gg/mGh8FbjPNT">Support</a></li>
+                    <li><a href="https://RealNexio.github.io/nexio/search">Search</a></li> 
+                    <li><a href="https://RealNexio.github.io/nexio/search/tools/">Tools</a></li> 
+                </ul> 
+            </nav> 
+        </header> 
+        <div class="search-page-container"> 
+            <div class="center">
+                <!-- Toto je upravený nadpis, ktorý umožní dvojfarebný efekt --> 
+                <div class="main-title"> 
+                    <span class="part-one">Nexio</span>
+                    <span class="part-two">Search</span>
+                </div> <!-- Koniec upraveného nadpisu --> 
+            </div> 
+            <div class="center"> 
+                <div class="search-form"> 
+                    <input type="text" id="searchInput" placeholder="Search something..."> 
+                    <button id="searchButton">🔍</button> 
+                </div> 
+            </div> 
+            <div id="results"> 
+                <p style="text-align: center; color: #ccc;">Loading results...</p> 
+            </div> 
+        </div> 
+        <div class="pagination"> 
+            <button id="prevPage" style="display: none;">Previous page</button> 
+            <button id="nextPage" style="display: none;">Next page</button> 
+        </div> 
+        <footer> <p>&copy Nexio - All Rights Reserved</p> </footer> 
+        <script src="search-results.js"></script> 
+    </body> 
 </html>
