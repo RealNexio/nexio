@@ -25,11 +25,9 @@
 
     <div class="search-page-container">
         <div class="center">
-            <!-- Toto je upravený nadpis, ktorý umožní dvojfarebný efekt -->
             <div class="main-title">
                 <span class="part-one">Nexio</span><span class="part-two">Search</span>
             </div>
-            <!-- Koniec upraveného nadpisu -->
         </div>
         <div class="center">
             <div class="search-form">
@@ -37,21 +35,28 @@
                 <button id="searchButton">🔍</button>
             </div>
         </div>
-        
+
+        <!-- ✨ AI Overview box -->
+        <div id="ai-overview" class="ai-overview" style="display:none;">
+            <h2>AI Overview</h2>
+            <p id="ai-text">Loading...</p>
+        </div>
+        <!-- /AI Overview -->
+
         <div id="results">
             <p style="text-align: center; color: #ccc;">Loading results...</p>
         </div>
     </div>
 
-<div class="pagination">
-    <button id="prevPage" style="display: none;">Previous page</button>
-    <button id="nextPage" style="display: none;">Next page</button>
-</div>
+    <div class="pagination">
+        <button id="prevPage" style="display: none;">Previous page</button>
+        <button id="nextPage" style="display: none;">Next page</button>
+    </div>
 
-<footer>
-    <p>&copy Nexio - All Rights Reserved</p>
-</footer>
+    <footer>
+        <p>&copy Nexio - All Rights Reserved</p>
+    </footer>
 
-<script src="search-results.js"></script>
+    <script src="search-results.js"></script>
 </body>
 </html>
