@@ -1,0 +1,5 @@
+window.CONFIG = {
+    SEARCH_KEY: "AIzaSyD597YdkmQ8Cz9UT2Wb2iDeRmHWb4dW_KQ",
+    CX: "967a9236a9c554e8f",
+    GEMINI_KEY: "AIzaSyCSV4BBDPPp0tIZv-T_opfXwa0aV2oTHgw"
+};
